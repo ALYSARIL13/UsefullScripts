@@ -1,17 +1,17 @@
 #====================> FixMachineKeysV5.ps1 <====================#
-
+ 
 #=====>Machine Keys path
 $Folder = "C:\ProgramData\Microsoft\Crypto\RSA\MachineKeys"
-
+ 
 #=====>Access Rule set
 $SYSTEM = New-Object System.Security.AccessControl.FileSystemAccessRule("SYSTEM","FullControl","Allow") 
 $Everyone = New-Object System.Security.AccessControl.FileSystemAccessRule("Everyone","Write,Read,Synchronize","Allow")
 $Administrators = New-Object System.Security.AccessControl.FileSystemAccessRule("Administrators","FullControl","Allow")
 $NETWORK_SERVICE = New-Object System.Security.AccessControl.FileSystemAccessRule("NETWORK SERVICE","Write,Read,Synchronize","Allow") 
-
+ 
 #=====>Change the owner to "BUILTIN/Administrators, in order to grant permissions#
-TAKEOWN /A /F $Folder /R
-
+TAKEOWN /A /F $Folder /R /D Y
+ 
 #=====>Repairing MachineKeys folder permissions
 $FolderAcl = Get-Acl $Folder
 While($FolderAcl.Access -ne $null){
@@ -22,7 +22,7 @@ While($FolderAcl.Access -ne $null){
 }
 $FolderAcl.AddAccessRule($Administrators), $FolderAcl.AddAccessRule($Everyone)
 Set-Acl $Folder $FolderAcl -Verbose
-
+ 
 #=====>Repairing Keys permissions
 $Keys = Get-ChildItem $Folder -Force
 ForEach($Key in $Keys){
@@ -36,7 +36,9 @@ ForEach($Key in $Keys){
     $KeyAcl.AddAccessRule($SYSTEM), $KeyAcl.AddAccessRule($Administrators), $KeyAcl.AddAccessRule($NETWORK_SERVICE)
     Set-Acl $Key.FullName $KeyAcl -Verbose
 }
-
+ 
+ICACLS $Folder /setowner SYSTEM /T
+ 
 #=====>Showing results of execution
 $Output = @()
 $Output = $Output + (Get-ACL $Folder)
