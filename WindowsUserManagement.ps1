@@ -1,6 +1,6 @@
-﻿#Setup the variables#
+#Setup the variables#
 $UserName = "username"
-$Password = "P@ssw0rd1234" #--> 12 or more characters #
+$Password = 'P@ssw0rd1234' #--> 12 or more characters #
  
 #Create the user account
 $ComputerName = $env:COMPUTERNAME
