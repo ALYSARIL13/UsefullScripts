@@ -1,6 +1,6 @@
 #Setup the variables#
-$UserName = "perg13" #--> It must contains 4 or more characters #
-$Password = 'Hadmin13Hadmin13' #--> It must contains 12 or more characters #
+$UserName = "UserName" #--> It must contains 4 or more characters #
+$Password = 'P@$$w0rd1234' #--> It must contains 12 or more characters #
 
 #Creating the user account
 $ComputerName = $env:COMPUTERNAME
