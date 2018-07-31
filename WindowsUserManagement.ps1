@@ -20,7 +20,7 @@ Try{
         $ExistingUser.SetInfo()
         Write-Host "The password for user '$UserName' was changed successfully."
     }Catch [System.Management.Automation.RuntimeException]{
-        Write-Warning $Error[0]
+        Write-Error $Error[0]
     }
 }
 
