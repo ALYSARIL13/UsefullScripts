@@ -30,11 +30,12 @@ printf "${SUBTITLE} 4. Collecting Journal logs for Microsoft Edge..."
 journalctl --user -b | grep -i 'microsoft-edge' > $logsPath/microsoft_edge.log
 printf "${INFO} Done!\n"
 
-printf "${SUBTITLE} 5. Collecting package details for Microsoft Identity Broker, Microsoft Edge, Intune Portal..."
+printf "${SUBTITLE} 5. Collecting package details for Microsoft Identity, Microsoft Edge, Intune Portal..."
 touch installed_apps.txt
 apt show intune-portal >> $logsPath/installed_apps.txt 2>&1
 apt show microsoft-edge-stable >> $logsPath/installed_apps.txt 2>&1
 apt show microsoft-identity-broker >> $logsPath/installed_apps.txt 2>&1
+apt show microsoft-identity-diagnostics >> $logsPath/installed_apps.txt 2>&1
 printf "${INFO} Done!\n"
 
 printf "${SUBTITLE} 6. Zipping files, please wait... "
