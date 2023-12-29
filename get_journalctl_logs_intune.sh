@@ -13,9 +13,9 @@ mkdir -p $logsPath
 
 #Script Execution
 printf "${TITLE}Collecting & Merging Logs...\n"
-printf "${SUBTITLE} 1. Collecting System Broker Device Logs... ${WARNING}(requires elevation to collect logs from a System Service)"
+printf "${SUBTITLE} 1. Collecting System Broker Device Logs... ${WARNING}(requires elevation to collect logs from a System Service)\n"
 sudo journalctl --system -b | grep -i 'microsoft-identity-device-broker' > $logsPath/broker.log
-printf "${INFO} Done!\n"
+printf "${INFO}	Done!\n"
 
 printf "${SUBTITLE} 2. Collecting User Broker Logs..."
 journalctl --user -b | grep -i 'microsoft-identity-broker' > $logsPath/user.log
